@@ -7,6 +7,11 @@ public class ChangeCalculator {
     public ChangeCalculator(double cost, double paid) {
         this.amount = paid - cost;
         this.currentState = new HundredState();
+        totalChange();
+    }
+
+    public void totalChange() {
+        System.out.println("Total change: " + amount);
     }
 
     public void startCalculate() {
