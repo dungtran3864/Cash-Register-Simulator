@@ -4,10 +4,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter amount of money to change: ");
-        double amount = scanner.nextDouble();
+        System.out.println("Enter total cost: ");
+        double cost = scanner.nextDouble();
+        cost = Math.round(cost * 100.0) / 100.0;
+        System.out.println("Enter paid amount: ");
+        double paid = scanner.nextDouble();
+        paid = Math.round(paid * 100.0) / 100.0;
         scanner.close();
-        ChangeMaker changeMaker = new ChangeMaker(amount);
-        changeMaker.startCalculate();
+        ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid);
+        changeCalculator.startCalculate();
     }
 }

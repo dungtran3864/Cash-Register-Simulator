@@ -2,16 +2,16 @@ public class DimeState implements State {
 
     private int count = 0;
 
-    public void calculateCurrency(ChangeMaker changeMaker) {
-        while (changeMaker.getAmount() - 0.10 >= 0) {
-            changeMaker.deductAmount(0.10);
+    public void calculateCurrency(ChangeCalculator changeCalculator) {
+        while (changeCalculator.getAmount() - 0.10 >= 0) {
+            changeCalculator.deductAmount(0.10);
             this.count += 1;
         }
         if (count != 0) {
             System.out.println("Dime: " + count);
         }
-        changeMaker.setState(new NickelState());
-        changeMaker.startCalculate();
+        changeCalculator.setState(new NickelState());
+        changeCalculator.startCalculate();
     }
 
 }

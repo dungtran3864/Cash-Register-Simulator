@@ -1,11 +1,11 @@
-public class ChangeMaker {
+public class ChangeCalculator {
 
     private double amount;
 
     private State currentState;
 
-    public ChangeMaker(double amount) {
-        this.amount = amount;
+    public ChangeCalculator(double cost, double paid) {
+        this.amount = paid - cost;
         this.currentState = new HundredState();
     }
 

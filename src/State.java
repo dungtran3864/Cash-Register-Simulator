@@ -1,4 +1,4 @@
 public interface State {
 
-    void calculateCurrency(ChangeMaker changeMaker);
+    void calculateCurrency(ChangeCalculator changeCalculator);
 }
