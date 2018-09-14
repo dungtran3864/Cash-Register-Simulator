@@ -4,7 +4,7 @@ Penny 10
 Fifty 10
 Five 10
 One 10
-Hundred 10
+Hundred 18
 Nickel 10
 Ten 10
 Two 10

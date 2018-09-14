@@ -7,9 +7,8 @@ public class Main {
         System.out.print("Enter total cost: ");
         double cost = scanner.nextDouble();
         cost = Math.round(cost * 100.0) / 100.0;
-        System.out.print("Enter paid amount: ");
-        double paid = scanner.nextDouble();
-        paid = Math.round(paid * 100.0) / 100.0;
+        PayerBills payerBills = new PayerBills();
+        double paid = payerBills.getPaid();
         scanner.close();
         ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid);
         changeCalculator.startCalculate();
