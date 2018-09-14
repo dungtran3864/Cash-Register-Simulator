@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class TextReader {
 
@@ -19,6 +21,23 @@ public class TextReader {
                 String[] splitString = line.split("\\s+");
                 this.billsCounter.addBill(splitString[0], Integer.parseInt(splitString[1]));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeFile() {
+        HashMap<String, Integer> billscounter = billsCounter.getBillscounter();
+        try {
+            File file = new File("db/bills.txt");
+            FileWriter fileWriter = new FileWriter(file, false);
+            Iterator it = billscounter.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry) it.next();
+                fileWriter.write(pair.getKey() + " " + pair.getValue() + "\n");
+                it.remove(); // avoids a ConcurrentModificationException
+            }
+            fileWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

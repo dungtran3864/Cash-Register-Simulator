@@ -27,14 +27,27 @@ public class BillsCounter {
 
     public void addBill(String bill, Integer amount) {
         int currentAmount = this.billscounter.get(bill);
-        amount = currentAmount + amount;
-        this.billscounter.put(bill, amount);
+        currentAmount = currentAmount + amount;
+        this.billscounter.put(bill, currentAmount);
     }
 
     public void subtractBill (String bill, Integer amount) {
         int currentAmount = this.billscounter.get(bill);
-        amount = currentAmount - amount;
-        this.billscounter.put(bill, amount);
+        currentAmount = currentAmount - amount;
+        this.billscounter.put(bill, currentAmount);
+    }
+
+    public int getBillsRemain(String bill) {
+        return this.billscounter.get(bill);
+    }
+
+    public HashMap<String, Integer> getBillscounter() {
+        return billscounter;
+    }
+
+    public void saveNewBills() {
+        TextReader textReader = new TextReader(this);
+        textReader.writeFile();
     }
 
 }
