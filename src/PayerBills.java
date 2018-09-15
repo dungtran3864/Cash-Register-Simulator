@@ -69,7 +69,7 @@ public class PayerBills {
         paid = paid + 0.01 * billsNumber;
         billsCounter.addBill("Penny", billsNumber);
 
-        System.out.println();
+        System.out.println(this.paid);
         saveNewBills();
     }
 

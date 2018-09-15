@@ -1,6 +1,8 @@
+import java.math.BigDecimal;
+
 public class ChangeCalculator {
 
-    private double amount;
+    private BigDecimal amount;
     private State currentState;
     private BillsCounter billsCounter;
     private QueueReader queueReader;
@@ -8,7 +10,9 @@ public class ChangeCalculator {
     public ChangeCalculator(double cost, double paid) {
         billsCounter = new BillsCounter();
         queueReader = new QueueReader();
-        this.amount = paid - cost;
+        BigDecimal costAmount = BigDecimal.valueOf(cost);
+        BigDecimal paidAmount = BigDecimal.valueOf(paid);
+        this.amount = paidAmount.subtract(costAmount);
         this.currentState = new HundredState();
         totalChange();
     }
@@ -25,12 +29,13 @@ public class ChangeCalculator {
         this.currentState = state;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return this.amount;
     }
 
-    public void deductAmount(String bill, double amount) {
-        this.amount -= amount;
+    public void deductAmount(String bill, double amountReduced) {
+        BigDecimal reduced = BigDecimal.valueOf(amountReduced);
+        this.amount = this.amount.subtract(reduced);
         this.billsCounter.subtractBill(bill, 1);
     }
 
