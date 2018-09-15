@@ -1,4 +1,6 @@
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class ChangeCalculator {
 
@@ -6,10 +8,12 @@ public class ChangeCalculator {
     private State currentState;
     private BillsCounter billsCounter;
     private QueueReader queueReader;
+    private HashMap<String, Integer> payerBills;
 
-    public ChangeCalculator(double cost, double paid) {
+    public ChangeCalculator(double cost, double paid, HashMap<String, Integer> payerBills) {
         billsCounter = new BillsCounter();
         queueReader = new QueueReader();
+        this.payerBills = payerBills;
         BigDecimal costAmount = BigDecimal.valueOf(cost);
         BigDecimal paidAmount = BigDecimal.valueOf(paid);
         this.amount = paidAmount.subtract(costAmount);
@@ -49,7 +53,16 @@ public class ChangeCalculator {
 
     public void printBillString() {
         this.queueReader.printList();
+        updateTotalBills();
         this.billsCounter.saveNewBills();
+    }
+
+    public void updateTotalBills() {
+        for (HashMap.Entry<String, Integer> entry : payerBills.entrySet()) {
+            if (entry.getValue() > 0) {
+                this.billsCounter.addBill(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
 }

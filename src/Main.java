@@ -7,14 +7,12 @@ public class Main {
         System.out.print("Enter total cost: ");
         double cost = scanner.nextDouble();
         cost = Math.round(cost * 100.0) / 100.0;
-//        PayerBills payerBills = new PayerBills();
-//        double paid = payerBills.getPaid();
-//        paid = Math.round(paid * 100.0) / 100.0;
-        System.out.print("Enter total paid: ");
-        double paid = scanner.nextDouble();
+        PayerBills payerBills = new PayerBills();
+        double paid = payerBills.getPaid();
         paid = Math.round(paid * 100.0) / 100.0;
         scanner.close();
-        ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid);
+        ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid, payerBills.getBillsCounter());
         changeCalculator.startCalculate();
+//        payerBills.saveNewBills();
     }
 }

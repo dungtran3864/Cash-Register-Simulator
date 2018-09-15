@@ -27,11 +27,11 @@ public class TextReader {
     }
 
     public void writeFile() {
-        HashMap<String, Integer> billscounter = billsCounter.getBillscounter();
+        HashMap<String, Integer> bills = this.billsCounter.getBillscounter();
         try {
             File file = new File("db/bills.txt");
             FileWriter fileWriter = new FileWriter(file, false);
-            Iterator it = billscounter.entrySet().iterator();
+            Iterator it = bills.entrySet().iterator();
             while (it.hasNext()) {
                 HashMap.Entry pair = (HashMap.Entry) it.next();
                 fileWriter.write(pair.getKey() + " " + pair.getValue() + "\n");
