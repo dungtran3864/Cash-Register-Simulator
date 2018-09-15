@@ -13,8 +13,11 @@ public class PayerBills {
 
     public void initializePayerBills() {
 
-        System.out.println("Input in the bills and number of each bill the following form: bill1 amount1, bill2 amount2, etc");
-        System.out.println("Failure to follow the form correctly will result in a failed transaction and starting over");
+        System.out.println("Input in the bills and number of each bill the following form: bill1 = amount1, bill2 = amount2, etc");
+        System.out.println("Bill list: hundred, fifty, twenty, ten, five, two, one, quarter, dime, nickel, penny ");
+        System.out.println("Hundred stands for $100, fifty stands for $50 and so on");
+        System.out.println("Example: hundred = 3, fifty = 2, ten = 7");
+        System.out.println();
         System.out.print("Now type in your bills: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -22,10 +25,12 @@ public class PayerBills {
         String[] billsList = billsString.split(",");
 
         for (String itemString : billsList) {
-            String[] itemList = itemString.trim().split("\\s+");
-            String bill = itemList[0].toLowerCase();
+            String[] itemList = itemString.trim().split("=");
+            String bill = itemList[0].replaceAll("^\\s+|\\s+$", "");
+            bill = bill.toLowerCase();
             bill = bill.substring(0,1).toUpperCase() + bill.substring(1).toLowerCase();
-            int amount = Integer.parseInt(itemList[1]);
+            String amountString = itemList[1].trim();
+            int amount = Integer.parseInt(amountString);
             addTotalPaid(bill, amount);
             this.billsCounter.put(bill, amount);
         }
