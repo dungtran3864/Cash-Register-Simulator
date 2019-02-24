@@ -7,5 +7,4 @@ One 10
 Hundred 10
 Nickel 10
 Ten 10
-Two 10
 Dime 10

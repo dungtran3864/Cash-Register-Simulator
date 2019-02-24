@@ -12,7 +12,6 @@ public class BillsCounter {
         this.billscounter.put("Twenty", 0);
         this.billscounter.put("Ten", 0);
         this.billscounter.put("Five", 0);
-        this.billscounter.put("Two", 0);
         this.billscounter.put("One", 0);
         this.billscounter.put("Quarter", 0);
         this.billscounter.put("Dime", 0);
