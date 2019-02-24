@@ -1,3 +1,3 @@
 # Cash-Register-Simulator
 
-Cash Register Simulator will calculate the total change and the number of each denomination to give back to customers, given the inputs of total shopping cost and total amount of money handed from customers. Cash Register Simulator also automatically updates the number of each denomination available in its database.
+Cash Register Simulator now has a new intuitive Graphical User Interface. Users no longer have to worry about the frustrating Command Line. Users now can input in the total shopping cost, and the denominations that customers give. Cash Register Simulator automatically calculates the total amount of money paid, the total change, the denominations to give back to them, and updates the denominations available in the cash register.
