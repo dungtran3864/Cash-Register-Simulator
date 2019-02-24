@@ -1,3 +1,3 @@
-# Change-Calculator
+# Cash-Register-Simulator
 
-Smart Cash Register will automatically help the cashier calculate the optimal change solution in a transaction. This helps the cashier avoid running out of change to give back to the customer in the long run. Smart Cash Register also automatically updates the number of each U.S bill available in its database.
+Cash Register Simulator will calculate the total change and the number of each denomination to give back to customers, given the inputs of total shopping cost and total amount of money handed from customers. Cash Register Simulator also automatically updates the number of each denomination available in its database.
