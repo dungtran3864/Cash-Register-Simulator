@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -17,13 +19,16 @@ import java.util.HashMap;
 
 public class GUI extends Application{
 
+    private Scene calScene;
+    public double totalMoney;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Change Calculator");
+        primaryStage.setTitle("Cash Register Simulator");
 
         // Create new calculator pane
         GridPane calPane = new GridPane();
@@ -96,8 +101,34 @@ public class GUI extends Application{
         calPane.add(pennyLabel, 0, 14);
         calPane.add(pennyInput, 1, 14);
 
+        Button totalMoneyButton = new Button();
+        totalMoneyButton.setText("Total Money Earned");
+        totalMoneyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                VBox totalMoneyPane = new VBox();
+
+                BillsCounter billsCounter = new BillsCounter();
+                Label totalMoneyLabel = new Label("Total money earned: $" + billsCounter.totalMoneyHave());
+
+                Button backButton = new Button();
+                backButton.setText("Back");
+                backButton.setOnAction(e -> primaryStage.setScene(calScene));
+
+                totalMoneyPane.getChildren().addAll(totalMoneyLabel, backButton);
+                totalMoneyPane.setAlignment(Pos.CENTER);
+                totalMoneyPane.setSpacing(10);
+
+                Scene totalMoneyScene = new Scene(totalMoneyPane, 300, 300);
+                primaryStage.setScene(totalMoneyScene);
+            }
+        });
+        calPane.add(totalMoneyButton, 1, 16);
+
         Button calculateButton = new Button();
         calculateButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            private Scene resultScene;
 
             @Override
             public void handle(ActionEvent event) {
@@ -139,7 +170,12 @@ public class GUI extends Application{
                     rowIdx += 1;
                 }
 
-                Scene resultScene = new Scene(resultPane, 350, 350);
+                Button backButton = new Button();
+                backButton.setText("Record Another Transaction");
+                resultPane.add(backButton, 0, rowIdx);
+                backButton.setOnAction(e -> primaryStage.setScene(calScene));
+
+                this.resultScene = new Scene(resultPane, 350, 350);
                 primaryStage.setScene(resultScene);
             }
 
@@ -179,10 +215,10 @@ public class GUI extends Application{
 
         });
         calculateButton.setText("Calculate Change");
-        calPane.add(calculateButton, 1, 17);
+        calPane.add(calculateButton, 0, 16);
 
-        Scene scene = new Scene(calPane, 370, 450);
-        primaryStage.setScene(scene);
+        this.calScene = new Scene(calPane, 370, 480);
+        primaryStage.setScene(calScene);
         primaryStage.show();
     }
 

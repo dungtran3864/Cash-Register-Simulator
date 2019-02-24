@@ -25,6 +25,21 @@ public class BillsCounter {
         textReader.initializeReading();
     }
 
+    public double totalMoneyHave() {
+        double total = 0.0;
+        total += this.billscounter.get("Hundred") * 100.0;
+        total += this.billscounter.get("Fifty") * 50.0;
+        total += this.billscounter.get("Twenty") * 20.0;
+        total += this.billscounter.get("Ten") * 10.0;
+        total += this.billscounter.get("Five") * 5.0;
+        total += this.billscounter.get("One") * 1.0;
+        total += this.billscounter.get("Quarter") * 0.25;
+        total += this.billscounter.get("Dime") * 0.10;
+        total += this.billscounter.get("Nickel") * 0.05;
+        total += this.billscounter.get("Penny") * 0.01;
+        return total;
+    }
+
     public void addBill(String bill, Integer amount) {
         int currentAmount = this.billscounter.get(bill);
         currentAmount = currentAmount + amount;
