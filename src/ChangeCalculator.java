@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -18,11 +19,6 @@ public class ChangeCalculator {
         BigDecimal paidAmount = BigDecimal.valueOf(paid);
         this.amount = paidAmount.subtract(costAmount);
         this.currentState = new HundredState();
-        totalChange();
-    }
-
-    public void totalChange() {
-        System.out.println("Total change: " + amount);
     }
 
     public void startCalculate() {
@@ -51,10 +47,17 @@ public class ChangeCalculator {
         this.queueReader.addBillsList(string);
     }
 
-    public void printBillString() {
-        this.queueReader.printList();
+    public void updateBillString() {
         updateTotalBills();
         this.billsCounter.saveNewBills();
+    }
+
+    public void noticeNotEnoughBills() {
+        this.queueReader.noticeNotEnoughBills();
+    }
+
+    public ArrayList<String> getListOfBills() {
+        return this.queueReader.getListOfBills();
     }
 
     public void updateTotalBills() {

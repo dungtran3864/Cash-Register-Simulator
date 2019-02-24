@@ -9,13 +9,16 @@ public class QueueReader {
     }
 
     public void addBillsList(String string) {
-        listOfBills.add(string);
+        this.listOfBills.add(string);
     }
 
-    public void printList() {
-        for (String string : listOfBills) {
-            System.out.println(string);
-        }
+    public void noticeNotEnoughBills() {
+        this.listOfBills = new ArrayList<>();
+        this.listOfBills.add("You don't have enough denominations to give back!");
+    }
+
+    public ArrayList<String> getListOfBills() {
+        return this.listOfBills;
     }
 
 }

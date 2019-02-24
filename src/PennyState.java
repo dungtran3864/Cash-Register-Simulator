@@ -19,9 +19,9 @@ public class PennyState implements State {
             changeCalculator.saveBillString("Penny: " + count);
         }
         if (changeCalculator.getAmount().compareTo(BigDecimal.ZERO) == 0) {
-            changeCalculator.printBillString();
+            changeCalculator.updateBillString();
         } else {
-            System.out.println("You don't have enough bills to change!");
+            changeCalculator.noticeNotEnoughBills();
         }
     }
 

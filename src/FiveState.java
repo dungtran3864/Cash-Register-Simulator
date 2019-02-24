@@ -16,7 +16,7 @@ public class FiveState implements State {
             }
         }
         if (count != 0) {
-            changeCalculator.saveBillString("$5 bills: " + count);
+            changeCalculator.saveBillString("$5: " + count);
         }
         changeCalculator.setState(new OneState());
         changeCalculator.startCalculate();

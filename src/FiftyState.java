@@ -16,7 +16,7 @@ public class FiftyState implements State {
             }
         }
         if (count != 0) {
-            changeCalculator.saveBillString("$50 bills: " + count);
+            changeCalculator.saveBillString("$50: " + count);
         }
         changeCalculator.setState(new TwentyState());
         changeCalculator.startCalculate();

@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GUI extends Application{
 
@@ -91,6 +97,87 @@ public class GUI extends Application{
         calPane.add(pennyInput, 1, 14);
 
         Button calculateButton = new Button();
+        calculateButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                double cost = Double.parseDouble(costInput.getText());
+                cost = Math.round(cost * 100.0) / 100.0;
+
+                HashMap<String, Integer> listOfDenominations = gatherDenominationInputs();
+                PayerBills payerBills = new PayerBills(listOfDenominations);
+                double paid = payerBills.getPaid();
+                paid = Math.round(paid * 100.0) / 100.0;
+
+                ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid, payerBills.getBillsCounter());
+                BigDecimal totalChange = changeCalculator.getAmount();
+
+                changeCalculator.startCalculate();
+                ArrayList<String> listOfBills = changeCalculator.getListOfBills();
+
+                GridPane resultPane = new GridPane();
+                resultPane.setVgap(5);
+                resultPane.setHgap(5);
+                resultPane.setPadding(new Insets(10, 10, 10, 10));
+                resultPane.setAlignment(Pos.CENTER);
+
+                Label totalCostLabel = new Label("Total cost: $" + cost);
+                Label totalPaidLabel = new Label("Total paid: $" + paid);
+                Label totalChangeLabel = new Label("Total change: $" + totalChange.toString());
+                resultPane.add(totalCostLabel,0,0);
+                resultPane.add(totalPaidLabel,0,1);
+                resultPane.add(totalChangeLabel,0,2);
+
+                Label noticeChangeLabel = new Label("Denominations to give back");
+                resultPane.add(noticeChangeLabel,0,5);
+
+                int rowIdx = 6;
+
+                for (String bill : listOfBills) {
+                    Label billLabel = new Label(bill);
+                    resultPane.add(billLabel, 0, rowIdx);
+                    rowIdx += 1;
+                }
+
+                Scene resultScene = new Scene(resultPane, 350, 350);
+                primaryStage.setScene(resultScene);
+            }
+
+            private HashMap<String, Integer> gatherDenominationInputs() {
+                HashMap<String, Integer> listOfDenominationInputs = new HashMap<>();
+                int hundred = acquireInput(hundredInput.getText());
+                listOfDenominationInputs.put("Hundred", hundred);
+                int fifty = acquireInput(fiftyInput.getText());
+                listOfDenominationInputs.put("Fifty", fifty);
+                int twenty = acquireInput(twentyInput.getText());
+                listOfDenominationInputs.put("Twenty", twenty);
+                int ten = acquireInput(tenInput.getText());
+                listOfDenominationInputs.put("Ten", ten);
+                int five = acquireInput(fiveInput.getText());
+                listOfDenominationInputs.put("Five", five);
+                int one = acquireInput(oneInput.getText());
+                listOfDenominationInputs.put("One", one);
+                int quarter = acquireInput(quarterInput.getText());
+                listOfDenominationInputs.put("Quarter", quarter);
+                int dime = acquireInput(dimeInput.getText());
+                listOfDenominationInputs.put("Dime", dime);
+                int nickel = acquireInput(nickelInput.getText());
+                listOfDenominationInputs.put("Nickel", nickel);
+                int penny = acquireInput(pennyInput.getText());
+                listOfDenominationInputs.put("Penny", penny);
+                return listOfDenominationInputs;
+            }
+
+            private int acquireInput(String input) {
+                if (input != null) {
+                    if (!input.trim().equals("")) {
+                        return Integer.parseInt(input);
+                    }
+                }
+                return 0;
+            }
+
+        });
         calculateButton.setText("Calculate Change");
         calPane.add(calculateButton, 1, 17);
 

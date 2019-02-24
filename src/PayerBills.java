@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PayerBills {
@@ -6,37 +8,18 @@ public class PayerBills {
     private double paid = 0.0;
     private HashMap<String, Integer> billsCounter;
 
-    public PayerBills() {
+    public PayerBills(HashMap<String, Integer> listOfDenominations) {
         this.billsCounter = new HashMap<>();
-        initializePayerBills();
+        initializePayerBills(listOfDenominations);
     }
 
-    public void initializePayerBills() {
-
-        System.out.println("Input in the bills and number of each bill the following form: bill1 = amount1, bill2 = amount2, etc");
-        System.out.println("Bill list: hundred, fifty, twenty, ten, five, two, one, quarter, dime, nickel, penny ");
-        System.out.println("Hundred stands for $100, fifty stands for $50 and so on");
-        System.out.println("Example: hundred = 3, fifty = 2, ten = 7");
-        System.out.println();
-        System.out.print("Now type in your bills: ");
-
-        Scanner scanner = new Scanner(System.in);
-        String billsString = scanner.nextLine();
-        String[] billsList = billsString.split(",");
-
-        for (String itemString : billsList) {
-            String[] itemList = itemString.trim().split("=");
-            String bill = itemList[0].replaceAll("^\\s+|\\s+$", "");
-            bill = bill.toLowerCase();
-            bill = bill.substring(0,1).toUpperCase() + bill.substring(1).toLowerCase();
-            String amountString = itemList[1].trim();
-            int amount = Integer.parseInt(amountString);
+    public void initializePayerBills(HashMap<String, Integer> listOfDenominations) {
+        for (Map.Entry<String, Integer> entry : listOfDenominations.entrySet()) {
+            String bill = entry.getKey();
+            int amount = entry.getValue();
             addTotalPaid(bill, amount);
             this.billsCounter.put(bill, amount);
         }
-
-        System.out.println("Total paid: " + this.paid);
-
     }
 
     public HashMap<String, Integer> getBillsCounter() {

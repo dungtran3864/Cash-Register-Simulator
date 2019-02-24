@@ -16,7 +16,7 @@ public class OneState implements State {
             }
         }
         if (count != 0) {
-            changeCalculator.saveBillString("$1 bills: " + count);
+            changeCalculator.saveBillString("$1: " + count);
         }
         changeCalculator.setState(new QuarterState());
         changeCalculator.startCalculate();

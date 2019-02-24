@@ -16,7 +16,7 @@ public class TenState implements State {
             }
         }
         if (count != 0) {
-            changeCalculator.saveBillString("$10 bills: " + count);
+            changeCalculator.saveBillString("$10: " + count);
         }
         changeCalculator.setState(new FiveState());
         changeCalculator.startCalculate();
