@@ -5,7 +5,6 @@ public class HundredState implements State {
     private int count = 0;
 
     public void calculateCurrency(ChangeCalculator changeCalculator) {
-        System.out.println(changeCalculator.billsRemain("Hundred"));
         while (changeCalculator.billsRemain("Hundred") > 0) {
             BigDecimal amountReduced = BigDecimal.valueOf(100);
             if (changeCalculator.getAmount().subtract(amountReduced).compareTo(BigDecimal.ZERO) == 0 ||

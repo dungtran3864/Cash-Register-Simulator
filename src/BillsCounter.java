@@ -42,7 +42,7 @@ public class BillsCounter {
         return this.billscounter.get(bill);
     }
 
-    public HashMap<String, Integer> getBillscounter() {
+    public HashMap<String, Integer> getBillsCounter() {
         return billscounter;
     }
 

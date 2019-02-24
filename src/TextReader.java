@@ -27,7 +27,7 @@ public class TextReader {
     }
 
     public void writeFile() {
-        HashMap<String, Integer> bills = this.billsCounter.getBillscounter();
+        HashMap<String, Integer> bills = this.billsCounter.getBillsCounter();
         try {
             File file = new File("db/bills.txt");
             FileWriter fileWriter = new FileWriter(file, false);

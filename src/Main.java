@@ -13,6 +13,5 @@ public class Main {
         scanner.close();
         ChangeCalculator changeCalculator = new ChangeCalculator(cost, paid, payerBills.getBillsCounter());
         changeCalculator.startCalculate();
-//        payerBills.saveNewBills();
     }
 }
